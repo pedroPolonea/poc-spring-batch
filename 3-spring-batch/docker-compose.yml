@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  mysqlsrv:
+    container_name: mysql-5_7
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "MySql2020!"
+      MYSQL_DATABASE: "testedb"
+    ports:
+      - "3306:3306"
+    volumes:
+      - /home/polonea/devLab/Docker/volumes/mysql:/var/lib/mysql
+    networks:
+      - mysql-compose-network
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: adm-mysql
+    depends_on:
+      - mysqlsrv
+    ports:
+      - 80:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - mysql-compose-network
+networks:
+  mysql-compose-network:
+    driver: bridge
