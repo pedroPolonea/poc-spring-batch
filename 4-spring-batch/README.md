@@ -1,5 +1,5 @@
 # poc-spring-batch
-step chunk-based
+Tasklet separation of concerns
 
 docker-compose up -d
 docker-compose stop
