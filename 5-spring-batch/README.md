@@ -1,5 +1,4 @@
 # poc-spring-batch
-Tasklet separation of concerns
 Leitura de arquivo de largura fixa
 
 
