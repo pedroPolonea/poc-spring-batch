@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 
 ### STS ###
+.mysql-volume
 .apt_generated
 .classpath
 .factorypath

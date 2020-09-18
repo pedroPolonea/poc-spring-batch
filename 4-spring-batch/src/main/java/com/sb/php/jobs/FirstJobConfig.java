@@ -20,9 +20,8 @@ public class FirstJobConfig {
     @Bean
     public Job firstJob(Step step){
         return jobBuilderFactory
-                .get("ImprimirFirstJob")
+                .get("PrintFirstJob")
                 .start(step)
                 .build();
-
     }
 }
