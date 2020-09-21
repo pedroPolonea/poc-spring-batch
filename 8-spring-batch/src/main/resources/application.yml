@@ -1,0 +1,32 @@
+spring:
+    datasource:
+        jdbcUrl: jdbc:mysql://localhost:3307/testedb?serverTimezone=UTC
+        username: root
+        password: root
+        tomcat:
+            test-while-idle: true
+            validation-query: SELECT 1
+    jpa:
+        hibernate:
+            ddl-auto: update
+            show_sql: true
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+                format_sql: true
+                type: trace
+    batch:
+        initialize-schema: always
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+app:
+    datasource:
+        jdbcUrl: jdbc:mysql://localhost:3307/appxpto?serverTimezone=UTC
+        username: adm
+        password: root
+logging:
+    level:
+        org.springframework.jdbc.core: DEBUG
