@@ -1,6 +1,6 @@
-package com.sb.php.reader;
+package com.sp.php.reader;
 
-import com.sb.php.domain.CovidDTO;
+import com.sp.php.domain.CharactersDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.file.FlatFileItemReader;
@@ -16,19 +16,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.validation.BindException;
 
-import java.time.LocalDate;
-
 @Slf4j
 @Configuration
 public class DelimitedFileReaderConfig {
 
     @Bean
     @StepScope
-    public FlatFileItemReader<CovidDTO> delimitedFile(
+    public FlatFileItemReader<CharactersDTO> delimitedFile(
             @Value("#{jobParameters['fileName']}") Resource resource){
 
         log.info("delimitedFile, I=Begin, resource={}", resource);
-        return new FlatFileItemReaderBuilder<CovidDTO>()
+        return new FlatFileItemReaderBuilder<CharactersDTO>()
                 .name("fixedWidthFile")
                 .linesToSkip(1)
                 .lineMapper(lineMapper())
@@ -38,19 +36,23 @@ public class DelimitedFileReaderConfig {
     }
 
     @Bean
-    public LineMapper<CovidDTO> lineMapper() {
-        DefaultLineMapper<CovidDTO> lineMapper = new DefaultLineMapper<>();
+    public LineMapper<CharactersDTO> lineMapper() {
+        DefaultLineMapper<CharactersDTO> lineMapper = new DefaultLineMapper<>();
         DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
 
         tokenizer.setDelimiter(",");
-        tokenizer.setNames("Date_reported",
-                "Country_code",
-                "Country",
-                "WHO_region",
-                "New_cases",
-                "Cumulative_cases",
-                "New_deaths",
-                "Cumulative_deaths");
+        tokenizer.setNames(
+                "name",
+                "height",
+                "mass",
+                "hair_color",
+                "skin_color",
+                "eye_color",
+                "birth_year",
+                "gender",
+                "homeworld",
+                "species"
+        );
         tokenizer.setStrict(false);
 
         LineFieldSetMapper lineFieldSetMapper = new LineFieldSetMapper();
@@ -62,19 +64,21 @@ public class DelimitedFileReaderConfig {
 
     }
 
-    class LineFieldSetMapper implements FieldSetMapper<CovidDTO> {
+    class LineFieldSetMapper implements FieldSetMapper<CharactersDTO> {
 
         @Override
-        public CovidDTO mapFieldSet(FieldSet fieldSet) throws BindException {
-            return CovidDTO.builder()
-                    .country(fieldSet.readString("Country"))
-                    .countryCode(fieldSet.readString("Country_code"))
-                    .whoRegion(fieldSet.readString("Country"))
-                    .cumulativeCases(fieldSet.readInt("Cumulative_cases"))
-                    .cumulativeDeaths(fieldSet.readInt("Cumulative_deaths"))
-                    .newCases(fieldSet.readInt("New_cases"))
-                    .newDeaths(fieldSet.readInt("New_deaths"))
-                    .dateReported(fieldSet.readString("Date_reported"))
+        public CharactersDTO mapFieldSet(FieldSet fieldSet) throws BindException {
+            return CharactersDTO.builder()
+                    .birthYear(fieldSet.readString("birth_year"))
+                    .eyeColor(fieldSet.readString("eye_color"))
+                    .gender(fieldSet.readString("gender"))
+                    .hairColor(fieldSet.readString("hair_color"))
+                    .height(fieldSet.readInt("height"))
+                    .homeworld(fieldSet.readString("homeworld"))
+                    .mass(fieldSet.readInt("mass"))
+                    .skinColor(fieldSet.readString("skin_color"))
+                    .name(fieldSet.readString("name"))
+                    .species(fieldSet.readString("species"))
                     .build();
         }
     }

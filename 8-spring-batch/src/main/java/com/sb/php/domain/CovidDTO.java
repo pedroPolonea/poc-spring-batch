@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CovidDTO implements Serializable {
 
-    private LocalDate dateReported;
+    private String dateReported;
 
     private String countryCode;
 
