@@ -10,6 +10,7 @@ import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
 
 @Slf4j
 @Configuration
@@ -19,7 +20,9 @@ public class StepConfig {
     private StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Step stepJob(ItemReader<CharactersDTO> itemReader, ItemProcessor<CharactersDTO, CharactersDTO> itemProcessor, JdbcBatchItemWriter<CharactersDTO> itemWriter) {
+    public Step stepJob(ItemReader<CharactersDTO> itemReader,
+                        ItemProcessor<CharactersDTO, CharactersDTO> itemProcessor,
+                        JdbcBatchItemWriter<CharactersDTO> itemWriter) {
         log.info("StepConfig.stepJob, I=Begin, ");
         return stepBuilderFactory
                 .get("exProcessorStep")
@@ -27,6 +30,7 @@ public class StepConfig {
                 .reader(itemReader)
                 .processor(itemProcessor)
                 .writer(itemWriter)
+                .taskExecutor(new SimpleAsyncTaskExecutor("simpleAsyncTaskExecutor"))
                 .build();
     }
 }

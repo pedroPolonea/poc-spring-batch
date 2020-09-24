@@ -12,16 +12,16 @@ USE appxpto;
 DROP TABLE IF EXISTS `characters`;
 CREATE TABLE `characters` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `skinColor` varchar(50) DEFAULT NULL,
-  `eyeColor` varchar(50) DEFAULT NULL,
-  `hairColor` varchar(50) DEFAULT NULL,
-  `birthYear` varchar(50) DEFAULT NULL,
-  `gender` varchar(50) DEFAULT NULL,
-  `homeworld` varchar(50) DEFAULT NULL,
-  `species` varchar(50) DEFAULT NULL,
-  `url` varchar(100) DEFAULT NULL,
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `skinColor` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `eyeColor` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `hairColor` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `birthYear` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `gender` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `homeworld` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `species` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `height` int DEFAULT NULL,
   `mass` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
+) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=utf8;
