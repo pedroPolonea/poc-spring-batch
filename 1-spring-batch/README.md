@@ -1,3 +1,3 @@
 # poc-spring-batch
 
-hello-world
+Exemplo basico de Spring Batch utilizando Tasklet (hello-world).
