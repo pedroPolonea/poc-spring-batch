@@ -7,14 +7,14 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.support.IteratorItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Configuration
@@ -31,6 +31,7 @@ public class BatchConfig {
     public Job jobParImpar(){
         return jobBuilderFactory
                 .get("ImprimirParImparJob")
+                .listener(jobListener())
                 .start(stepJob())
                 .build();
 
@@ -47,7 +48,11 @@ public class BatchConfig {
     }
 
     private IteratorItemReader<Integer> getData() {
-        return new IteratorItemReader<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9,10));
+        List intList = new ArrayList<Integer>();
+        for (int i = 0; i < 100; i++) {
+            intList.add(i);
+        }
+        return new IteratorItemReader<Integer>(intList);
     }
 
     private ItemProcessor<? super Integer,? extends String> processorData() {
@@ -56,5 +61,10 @@ public class BatchConfig {
 
     private ItemWriter<? super String> printData() {
         return items -> items.forEach(s -> log.info(s));
+    }
+
+    @Bean
+    public JobCustomerExecutionListener jobListener() {
+        return new JobCustomerExecutionListener();
     }
 }
