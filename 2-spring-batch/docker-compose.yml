@@ -1,34 +1,34 @@
 version: '3'
 
 services:
-  mysqlsrv:
-    container_name: mysql-5_7
+  server-sb-poc-02:
+    container_name: mysql-sb-poc-02
     image: mysql/mysql-server:8.0
     command: --character-set-server=utf8  --collation-server=utf8_general_ci
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
-      - MYSQL_DATABASE=testedb
+      - MYSQL_DATABASE=sb-poc-02
     ports:
       - "3307:3306"
-    volumes:
-      - /home/polonea/devLab/Docker/volumes/mysql:/var/lib/mysql
+#    volumes:
+#      - /home/polonea/devLab/Docker/volumes/mysql:/var/lib/mysql
     networks:
-      - mysql-compose-network
+      - mysql-cn-sb-poc-02
 
-  phpmyadmin:
+  phpmyadmin-sb-poc-02:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: adm-mysql
+    container_name: adm-mysql-sb-poc-02
     depends_on:
-      - mysqlsrv
+      - server-sb-poc-02
     ports:
       - 80:80
     environment:
       - PMA_ARBITRARY=1
     networks:
-      - mysql-compose-network
+      - mysql-cn-sb-poc-02
 
 networks:
-  mysql-compose-network:
+  mysql-cn-sb-poc-02:
     driver: bridge
