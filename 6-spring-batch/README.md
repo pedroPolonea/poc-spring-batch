@@ -14,6 +14,6 @@ Após subir o container podemos acessar o SGBD pelo link a seguir.
 
 [Acessar phpMyAdmin](http://localhost/)
 
-    Server: server-sb-poc-03
+    Server: server-sb-poc-06
     User: root
     Password: root
