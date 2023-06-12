@@ -4,11 +4,24 @@ Leitura de arquivo delimitado
 
 fileName=file:files/characters.csv
 
-sudo rm -r .mysql-volume
+### Metadados
 
+    docker-compose up -d
+    docker-compose stop
 
+##### Acesso a inteface SGBD
+Após subir o container podemos acessar o SGBD pelo link a seguir.
 
-docker-compose up -d
-docker-compose stop
+[Acessar phpMyAdmin](http://localhost:8081/)
 
-http://localhost:8081/
+      Server: server-sb-poc-09
+        User: root
+    Password: root
+          db: sb-poc-08
+
+--
+
+      Server: server-sb-poc-09
+        User: adm
+    Password: root
+          db: appxpto

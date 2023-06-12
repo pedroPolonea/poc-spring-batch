@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  mysqlsrv:
-    container_name: mysql-8_0
+  server-sb-poc-09:
+    container_name: mysql-sb-poc-09
     image: mysql/mysql-server:8.0
     command: --character-set-server=utf8  --collation-server=utf8_general_ci
     environment:
@@ -10,23 +10,23 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
-      - MYSQL_DATABASE=testedb
+      - MYSQL_DATABASE=sb-poc-09
     ports:
-      - "3307:3306"
+      - "3314:3306"
     volumes:
-      - .docker/setup.sql:/docker-entrypoint-initdb.d/setup.sqlS
-      - .mysql-volume:/var/lib/mysql
+      - .docker/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+#      - .mysql-volume:/var/lib/mysql
     networks:
-      - mysql-compose-network
-  adminer:
+      - mysql-cn-sb-poc-09
+  adminer-sb-poc-09:
     image: adminer
-    container_name: adm-mysql
+    container_name: adm-mysql-sb-poc-09
     depends_on:
-      - mysqlsrv
+      - server-sb-poc-09
     ports:
       - 8081:8080
     networks:
-      - mysql-compose-network
+      - mysql-cn-sb-poc-09
 networks:
-  mysql-compose-network:
+  mysql-cn-sb-poc-09:
     driver: bridge

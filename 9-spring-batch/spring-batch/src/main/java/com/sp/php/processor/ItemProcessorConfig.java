@@ -1,6 +1,7 @@
 package com.sp.php.processor;
 
 import com.sp.php.config.SwapiClient;
+import com.sp.php.domain.CharacterDTO;
 import com.sp.php.domain.CharactersDTO;
 import com.sp.php.domain.PeopleDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,13 @@ public class ItemProcessorConfig {
 
             log.info("ItemProcessor.itemProcessorStep, item={}, people={}", item, people);
             if(Objects.nonNull(people)) {
-                item.setUrl(people.getResults().get(0).getUrl());
+                item.setUrl(
+                        people.getResults()
+                                .stream()
+                                .map(CharacterDTO::getUrl)
+                                .findFirst()
+                                .orElseGet(() -> null)
+                );
                 return item;
             }
 
