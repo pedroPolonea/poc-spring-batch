@@ -19,12 +19,13 @@ public class JobConfig {
     private JobBuilderFactory jobBuilderFactory;
 
     @Bean
-    public Job firstJob(Step step){
-        log.info("JobConfig.firstJob, I=Begin ,stepName={}", step.getName());
+    public Job firstJob(Step stepJob, Step stepJobListenerRabbit){
+        log.info("JobConfig.firstJob, I=Begin ,stepName={}", stepJob.getName());
         return jobBuilderFactory
                 .get("covid19Job")
-                .start(step)
                 .incrementer(new RunIdIncrementer())
+                .start(stepJob)
+                .next(stepJobListenerRabbit)
                 .build();
 
     }

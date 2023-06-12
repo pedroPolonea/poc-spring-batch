@@ -62,7 +62,7 @@ public class RabbitConfig {
 
 
     @Getter
-    enum QueueEnum {
+    public enum QueueEnum {
         BATCH_COVID(new Queue("batch-covid-queue"), new DirectExchange("batch-covid-exchange"));
 
         private Queue queue;

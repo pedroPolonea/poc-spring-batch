@@ -58,6 +58,7 @@ public class DelimitedFileReaderConfig {
         lineMapper.setLineTokenizer(tokenizer);
         lineMapper.setFieldSetMapper(new LineFieldSetMapper());
 
+        log.info("delimitedFile, I=Lendo aquivo csv, lineMapper={}", lineMapper);
         return lineMapper;
 
     }

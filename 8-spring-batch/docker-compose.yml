@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  mysqlsrv:
-    container_name: mysql-8_0
+  server-sb-poc-08:
+    container_name: mysql-sb-poc-08
     image: mysql/mysql-server:8.0
     command: --character-set-server=utf8  --collation-server=utf8_general_ci
     environment:
@@ -10,24 +10,24 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
-      - MYSQL_DATABASE=testedb
+      - MYSQL_DATABASE=sb-poc-08
     ports:
-      - "3307:3306"
+      - "3313:3306"
     volumes:
       - .docker/setup.sql:/docker-entrypoint-initdb.d/setup.sql
-      - /home/polonea/devLab/Docker/volumes/mysql:/var/lib/mysql
+#      - /home/polonea/devLab/Docker/volumes/mysql:/var/lib/mysql
     networks:
-      - mysql-compose-network
-  adminer:
+      - mysql-cn-sb-poc-08
+  adminer-sb-poc-08:
     image: adminer
-    container_name: adm-mysql
+    container_name: adm-mysql-sb-poc-08
     depends_on:
-      - mysqlsrv
+      - server-sb-poc-08
     ports:
       - 8081:8080
     networks:
-      - mysql-compose-network
-  rabbitmq:
+      - mysql-cn-sb-poc-08
+  rabbitmq-sb-poc-08:
     image: rabbitmq:3-management
     hostname: my-rabbit
     #volumes:
@@ -39,5 +39,5 @@ services:
       - 5672:5672
       - 15672:15672
 networks:
-  mysql-compose-network:
+  mysql-cn-sb-poc-08:
     driver: bridge

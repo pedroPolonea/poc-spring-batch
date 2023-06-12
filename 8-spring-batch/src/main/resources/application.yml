@@ -1,6 +1,6 @@
 spring:
     datasource:
-        jdbcUrl: jdbc:mysql://localhost:3307/testedb?serverTimezone=UTC
+        jdbcUrl: jdbc:mysql://localhost:3313/sb-poc-08?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
         username: root
         password: root
         tomcat:
@@ -24,7 +24,7 @@ spring:
         password: guest
 app:
     datasource:
-        jdbcUrl: jdbc:mysql://localhost:3307/appxpto?serverTimezone=UTC
+        jdbcUrl: jdbc:mysql://localhost:3313/appxpto?serverTimezone=UTC
         username: adm
         password: root
 logging:
