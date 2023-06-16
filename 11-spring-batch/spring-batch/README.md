@@ -1,6 +1,6 @@
 # poc-spring-batch
 
-
+https://github.com/spring-projects/spring-batch/blob/main/spring-batch-core/src/main/resources/org/springframework/batch/core/schema-mysql.sql
 ### Metadados
 
     docker-compose up -d
