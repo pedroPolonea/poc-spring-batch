@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:5017;databaseName=sb_poc_12;encrypt=false;
+    username: sa
+    password: MyPass@word
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    platform: mssql
+  jpa:
+    hibernate:
+      ddl-auto: none
+      show_sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        format_sql: true
+        type: trace
+  batch:
+    initialize-schema: never
+    job:
+      enabled: false

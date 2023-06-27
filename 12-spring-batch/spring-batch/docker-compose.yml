@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  sqlserver-sb-poc-12:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: SQLServer
+    restart: always
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+      - SA_PASSWORD=MyPass@word     #user sa
+#      - MSSQL_DB=sb-poc-12
+#      - MSSQL_USER=root@root
+#      - MSSQL_PASSWORD=root@root
+    ports:
+      - 5017:1433
+    networks:
+      - sqlserver-cn-sb-poc-12
+  mssqltools-sb-poc-12:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      - sqlserver-sb-poc-12
+    volumes:
+      - .docker/setup.sql:/tmp/setup.sql
+      - .docker/init.sh:/tmp/init.sh
+    command: /bin/bash ./tmp/init.sh
+    networks:
+      - sqlserver-cn-sb-poc-12
+  dbeaver-sb-poc-12:
+    image: dbeaver/cloudbeaver:23.1.0
+    container_name: CloudBeaver
+    restart: unless-stopped
+    depends_on:
+      - sqlserver-sb-poc-12
+#    volumes:
+#      - dbeaver-data:/opt/cloudbeaver/workspace
+    ports:
+      - 5021:8978
+    networks:
+      - sqlserver-cn-sb-poc-12
+#volumes:
+#  dbeaver-data:
+networks:
+  sqlserver-cn-sb-poc-12:
+    driver: bridge
